@@ -3,12 +3,15 @@ import Modal from "./Modal";
 import { useAuth } from "../context/authContext";
 import { useTask } from "../context/taskContext";
 
+import { ToastContainer, toast } from "react-toastify";
+
 const TaskForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCompleted, setisCompleted] = useState(false);
   const [isImportant, setisImportant] = useState(false);
   const { addTask } = useTask();
   const { user } = useAuth();
+
   // !modal
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -18,8 +21,6 @@ const TaskForm = () => {
   const description = useRef();
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
-
     await addTask(
       task.current.value,
       description.current.value,
@@ -29,11 +30,21 @@ const TaskForm = () => {
       user
     );
     closeModal();
-    
+    toast("Task Added", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
 
   return (
-    <div>
+    <div className="">
+      <ToastContainer />
       <button onClick={openModal} className="text-white">
         Add Task
       </button>
@@ -86,6 +97,7 @@ const TaskForm = () => {
                 onChange={() => setisCompleted(true)}
               />
             </div>
+
             <div className=" flex justify-between">
               <h3 className="text-white">Toggle Important</h3>
               <input
@@ -97,7 +109,7 @@ const TaskForm = () => {
             </div>
           </div>
           <button
-            className="btn btn-info float-right mt-5"
+            className="btn btn-success float-right mt-5"
             onClick={handleSubmit}
           >
             + Create Task

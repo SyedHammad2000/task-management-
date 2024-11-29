@@ -4,6 +4,8 @@ import { useTask } from "../context/taskContext";
 import { useAuth } from "../context/authContext";
 import { motion } from "motion/react";
 
+import { toast } from "react-toastify";
+
 const Dashboard = () => {
   const { user } = useAuth();
   const { getTaskDoc, data, setData, handleTask, delDoc } = useTask();
@@ -16,6 +18,16 @@ const Dashboard = () => {
 
   const handleDelete = async (id) => {
     await delDoc(id);
+    toast("Task Deleted", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
 
   return (

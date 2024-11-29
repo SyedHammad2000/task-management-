@@ -10,6 +10,8 @@ import { AuthContextProvider } from "./context/authContext";
 import ProtectedRoute from "./route/ProtectedRoute";
 import TaskContextProvider from "./context/taskContext";
 
+
+
 const App = () => {
   return (
     <AuthContextProvider>

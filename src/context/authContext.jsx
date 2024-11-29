@@ -30,7 +30,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const login = async (email, password) => {
     const signin = await signInWithEmailAndPassword(auth, email, password);
-    console.log(signin);
+    
   };
   const register = async (email, password, profileurl, username) => {
     const userAuth = await createUserWithEmailAndPassword(
@@ -38,7 +38,6 @@ export const AuthContextProvider = ({ children }) => {
       email,
       password
     );
-    console.log(userAuth, "sss");
 
     const docRef = await addDoc(collection(db, "users"), {
       uid: userAuth.user?.uid,
@@ -46,8 +45,6 @@ export const AuthContextProvider = ({ children }) => {
       username: username,
       profileurl: profileurl,
     });
-
-    console.log(docRef);
   };
   const logout = async () => {
     await auth.signOut();

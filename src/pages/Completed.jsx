@@ -13,8 +13,6 @@ const Completed = () => {
     }
   }, [user]);
 
-  console.log(data);
-
   return (
     <div
       className="w-[100%] h-[100vh] rounded-md py-3 px-3"
@@ -26,7 +24,6 @@ const Completed = () => {
       </div>
       <div className="flex flex-wrap gap-2">
         {data?.map((doc) => {
-          console.log(doc);
           return (
             <div
               key={doc.id}

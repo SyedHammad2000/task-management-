@@ -12,8 +12,7 @@ const Login = () => {
   const handleSignin = async (e) => {
     e.preventDefault();
     if (!eRef.current || !pRef.current) {
-      console.log("inthis");
-      console.log(eRef.current);
+      
       alert("wrong usercredential");
       return;
     }

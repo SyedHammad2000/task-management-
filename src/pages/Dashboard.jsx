@@ -21,9 +21,9 @@ const Dashboard = () => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1,   }}
+      animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="w-[100%] h-[100%] min-h-[100vh] rounded-md py-3 px-3 space-y-2 font-roboto relative"
+      className="w-[100%] min-w-auto h-[100%] min-h-[100vh] rounded-md py-3 px-3 space-y-2 font-roboto relative"
       style={{ backgroundColor: "rgb(21 21 19)" }}
     >
       <button className="absolute btn btn-dark z-50 bg-transparent right-5">
@@ -36,7 +36,6 @@ const Dashboard = () => {
       </div>
       <div className="flex flex-wrap gap-2">
         {data?.map((doc) => {
-          console.log(doc);
           return (
             <motion.div
               initial={{ opacity: 0 }}

@@ -16,14 +16,11 @@ const taskcontext = createContext();
 
 export const useTask = () => useContext(taskcontext);
 const TaskContextProvider = ({ children }) => {
-  //   const { user } = useAuth();
   const [data, setData] = useState();
 
   useEffect(() => {
-    // getTaskDoc();
   }, []);
 
-  //   if (!user) return <Navigate to={"login"} />;
 
   const addTask = async (name, desc, date, tog_com, tog_imp, user) => {
     const docref = await addDoc(collection(db, "tasks"), {
@@ -34,7 +31,6 @@ const TaskContextProvider = ({ children }) => {
       tog_com: tog_com,
       tog_imp: tog_imp,
     });
-    console.log(docref);
 
     setData(
       data

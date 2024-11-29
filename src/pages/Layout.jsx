@@ -11,10 +11,8 @@ const Layout = () => {
   const { isAuthenticated, logout } = useAuth();
   const [onOpen, setOpen] = useState();
   const navigate = useNavigate();
-  console.log(isAuthenticated);
   const handleToggle = () => {
     setOpen(!onOpen);
-    console.log(onOpen);
   };
 
   useEffect(() => {
@@ -33,7 +31,7 @@ const Layout = () => {
   };
 
   return (
-    <div className="flex p-2 space-x-1">
+    <div className="flex p-2 space-x-1 ">
       <div
         className="h-[100vh] w-[30%] lg:w-[20%] md:w-[10rem]  sm:w-[10rem] sm:d-flex rounded-md flex justify-between items-center flex-col py-3 d-none d-sm-flex "
         style={{ backgroundColor: "rgb(21 21 19)" }}
@@ -54,7 +52,7 @@ const Layout = () => {
         </div>
         <div className="space-y-2">
           <div
-            className={`w-[100%] relative group text-center  py-1 ${
+            className={`w-[100%] lg:w-[20vw] relative group text-center  py-1 ${
               selectedTag ? "bg-[#2f4f4f66]" : ""
             }`}
           >
@@ -242,6 +240,7 @@ const Layout = () => {
             handleToggle();
           }
         }}
+        className="w-[100%]"
       >
         <Outlet />
       </div>

@@ -48,6 +48,7 @@ const TaskContextProvider = ({ children }) => {
           ]
         : data
     );
+    
   };
 
   const getTaskDoc = async (user) => {

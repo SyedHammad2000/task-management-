@@ -3,7 +3,6 @@ import Modal from "./Modal";
 import { useAuth } from "../context/authContext";
 import { useTask } from "../context/taskContext";
 
-
 const TaskForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCompleted, setisCompleted] = useState(false);
@@ -19,7 +18,7 @@ const TaskForm = () => {
   const description = useRef();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     await addTask(
       task.current.value,
@@ -29,6 +28,8 @@ const TaskForm = () => {
       isImportant,
       user
     );
+    closeModal();
+    
   };
 
   return (

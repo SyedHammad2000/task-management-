@@ -3,7 +3,7 @@ import React from "react";
 const Important = () => {
   return (
     <div
-      className="w-[100%] h-[100vh] rounded-md py-3 px-3"
+      className="w-[100%] h-[100vh] rounded-md py-3 px-3 space-y-2"
       style={{ backgroundColor: "rgb(21 21 19)" }}
     >
       <div className="relative w-[100px] h-[25px]">

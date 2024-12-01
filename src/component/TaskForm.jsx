@@ -21,6 +21,20 @@ const TaskForm = () => {
   const description = useRef();
 
   const handleSubmit = async (e) => {
+    if (
+      !task.current.value ||
+      !description.current.value ||
+      !date.current.value
+    ) {
+      return toast("Please provide the values", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: true,
+        draggable: true,
+        pauseOnHover: false,
+        theme: "dark",
+      });
+    }
     await addTask(
       task.current.value,
       description.current.value,

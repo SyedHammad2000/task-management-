@@ -5,6 +5,8 @@ import { useAuth } from "../context/authContext";
 import { motion } from "motion/react";
 
 import { toast } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRemove } from "@fortawesome/free-solid-svg-icons";
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -46,7 +48,7 @@ const Dashboard = () => {
         <h1 className="text-[#FFF7D1] ">All Task</h1>
         <span className="absolute bottom-0 left-0 h-[2px] bg-[#FFF7D1] w-[20px] "></span>
       </div>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 font-mono">
         {data?.map((doc) => {
           return (
             <motion.div
@@ -54,7 +56,7 @@ const Dashboard = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               whileHover={{
-                scale: 1.05,
+                scale: 1.02,
               }}
               key={doc.id}
               className="w-[400px] h-[200px] md:w-[250px] p-2 rounded-md space-y-[70px]"
@@ -62,7 +64,7 @@ const Dashboard = () => {
             >
               <div className="text-[white] space-y-2 ">
                 <h2>{doc?.name}</h2>
-                <p className="text-[12px]">{doc.desc}</p>
+                <p className="text-[12px] h-[38px] ">{doc.desc}</p>
               </div>
               <div className="text-[white] text-[12px]">
                 <p>{doc.date}</p>
@@ -80,12 +82,13 @@ const Dashboard = () => {
                   <div className="space-x-1 ">
                     <button
                       onClick={() => handleDelete(doc?.id)}
-                      className="btn btn-danger rounded-full text-[12px] text-center"
+                      className="btn hover:animate-pulse rounded-full text-[12px] text-center"
                     >
-                      D
-                    </button>
-                    <button className="btn btn-success rounded-full text-[12px] text-center">
-                      E
+                      <FontAwesomeIcon
+                        icon={faRemove}
+                        color="red"
+                        fontSize={"20px"}
+                      />
                     </button>
                   </div>
                 </div>

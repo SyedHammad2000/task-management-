@@ -123,7 +123,13 @@ const TaskForm = () => {
             </div>
           </div>
           <button
-            className="btn btn-success float-right mt-5"
+            className="btn btn-danger float-right mt-5"
+            onClick={closeModal}
+          >
+            Close
+          </button>
+          <button
+            className="btn btn-success float-right mt-5 mr-1"
             onClick={handleSubmit}
           >
             + Create Task

@@ -3,14 +3,13 @@ import TaskForm from "../component/TaskForm";
 import { useTask } from "../context/taskContext";
 import { useAuth } from "../context/authContext";
 import { motion } from "motion/react";
-
 import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRemove } from "@fortawesome/free-solid-svg-icons";
-
 const Dashboard = () => {
   const { user } = useAuth();
   const { getTaskDoc, data, setData, handleTask, delDoc } = useTask();
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -30,6 +29,12 @@ const Dashboard = () => {
       progress: undefined,
       theme: "dark",
     });
+  };
+  const Toggle = async (id) => {
+    setLoading(true);
+    await handleTask(id);
+
+    setLoading(false);
   };
 
   return (
@@ -71,12 +76,34 @@ const Dashboard = () => {
                 <div className="flex justify-between">
                   <div>
                     <button
-                      onClick={() => handleTask(doc.id)}
+                      disabled={isLoading}
+                      onClick={() => Toggle(doc.id)}
                       className={`btn ${
                         doc?.tog_com ? "btn-success" : "btn-danger"
-                      } text-[12px] rounded-full text-center`}
+                      } text-[12px] rounded-full text-center w-[90px] `}
                     >
-                      {doc?.tog_com ? "Completed" : "Incomplete"}
+                      {isLoading ? (
+                        <motion.div
+                          style={{
+                            width: "20px",
+                            height: "20px",
+                            border: "4px solid white",
+                            borderTop: "4px solid blue",
+                            borderRadius: "50%",
+                            margin: "auto",
+                          }}
+                          animate={{ rotate: 360 }}
+                          transition={{
+                            repeat: Infinity,
+                            duration: 1,
+                            ease: "linear",
+                          }}
+                        ></motion.div>
+                      ) : doc?.tog_com ? (
+                        "Completed"
+                      ) : (
+                        "Incomplete"
+                      )}
                     </button>
                   </div>
                   <div className="space-x-1 ">

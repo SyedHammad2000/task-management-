@@ -14,12 +14,7 @@ const Modal = ({ isOpen, onClose, children }) => {
         style={{ backgroundColor: "rgb(21 21 19)" }}
         onClick={(e) => e.stopPropagation()}
       >
-        <button
-          className="text-white position-absolute bg-transparent top-10 right-20"
-          onClick={onClose}
-        >
-          Close
-        </button>
+        
         {children}
       </div>
     </div>

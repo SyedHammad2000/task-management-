@@ -32,7 +32,7 @@ const Completed = () => {
             >
               <div className="text-[white] space-y-2 ">
                 <h2>{doc?.name}</h2>
-                <p className="text-[12px]">{doc.desc}</p>
+                <p className="text-[12px] h-[38px]">{doc.desc}</p>
               </div>
               <div className="text-[white] text-[12px]">
                 <p>{doc.date}</p>
@@ -45,17 +45,6 @@ const Completed = () => {
                       } text-[12px] rounded-full text-center`}
                     >
                       {doc?.tog_com ? "Completed" : "Incomplete"}
-                    </button>
-                  </div>
-                  <div className="space-x-1 ">
-                    <button
-                      onClick={() => handleDelete(doc?.id)}
-                      className="btn btn-danger rounded-full text-[12px] text-center"
-                    >
-                      D
-                    </button>
-                    <button className="btn btn-success rounded-full text-[12px] text-center">
-                      E
                     </button>
                   </div>
                 </div>

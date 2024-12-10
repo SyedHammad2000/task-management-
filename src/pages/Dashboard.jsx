@@ -6,10 +6,10 @@ import { motion } from "motion/react";
 import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRemove } from "@fortawesome/free-solid-svg-icons";
+import Spinner from "../component/Spinner";
 const Dashboard = () => {
   const { user } = useAuth();
-  const { getTaskDoc, data, setData, handleTask, delDoc } = useTask();
-  const [isLoading, setLoading] = useState(false);
+  const { getTaskDoc, data, setData, handleTask, delDoc, loading } = useTask();
 
   useEffect(() => {
     if (user) {
@@ -31,10 +31,16 @@ const Dashboard = () => {
     });
   };
   const Toggle = async (id) => {
-    setLoading(true);
     await handleTask(id);
-
-    setLoading(false);
+    toast("Task Updated", {
+      position: "top-left",
+      autoClose: 2000,
+      closeOnClick: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+    
   };
 
   return (
@@ -54,7 +60,7 @@ const Dashboard = () => {
         <span className="absolute bottom-0 left-0 h-[2px] bg-[#FFF7D1] w-[20px] "></span>
       </div>
       <div className="flex flex-wrap gap-2 font-mono">
-        {data?.map((doc) => {
+        {data?.map((doc, ind) => {
           return (
             <motion.div
               initial={{ opacity: 0 }}
@@ -63,7 +69,7 @@ const Dashboard = () => {
               whileHover={{
                 scale: 1.02,
               }}
-              key={doc.id}
+              key={ind}
               className="w-[400px] h-[200px] md:w-[250px] p-2 rounded-md space-y-[70px]"
               style={{ backgroundColor: "rgb(58 58 54 / 47%)" }}
             >
@@ -76,34 +82,12 @@ const Dashboard = () => {
                 <div className="flex justify-between">
                   <div>
                     <button
-                      disabled={isLoading}
-                      onClick={() => Toggle(doc.id)}
+                      onClick={() => Toggle(doc?.id)}
                       className={`btn ${
                         doc?.tog_com ? "btn-success" : "btn-danger"
                       } text-[12px] rounded-full text-center w-[90px] `}
                     >
-                      {isLoading ? (
-                        <motion.div
-                          style={{
-                            width: "20px",
-                            height: "20px",
-                            border: "4px solid white",
-                            borderTop: "4px solid blue",
-                            borderRadius: "50%",
-                            margin: "auto",
-                          }}
-                          animate={{ rotate: 360 }}
-                          transition={{
-                            repeat: Infinity,
-                            duration: 1,
-                            ease: "linear",
-                          }}
-                        ></motion.div>
-                      ) : doc?.tog_com ? (
-                        "Completed"
-                      ) : (
-                        "Incomplete"
-                      )}
+                      {doc?.tog_com ? "Completed" : "Pending"}
                     </button>
                   </div>
                   <div className="space-x-1 ">
@@ -123,6 +107,7 @@ const Dashboard = () => {
             </motion.div>
           );
         })}
+        {/* <Spinner isLoading={true} /> */}
 
         <div className="w-[250px] h-[200px] p-2 rounded-md flex justify-center items-center border-1 border-gray-700">
           <TaskForm />

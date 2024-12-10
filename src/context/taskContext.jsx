@@ -17,10 +17,9 @@ const taskcontext = createContext();
 export const useTask = () => useContext(taskcontext);
 const TaskContextProvider = ({ children }) => {
   const [data, setData] = useState();
+  const [loading, setLoading] = useState();
 
-  useEffect(() => {
-  }, []);
-
+  useEffect(() => {}, []);
 
   const addTask = async (name, desc, date, tog_com, tog_imp, user) => {
     const docref = await addDoc(collection(db, "tasks"), {
@@ -48,7 +47,6 @@ const TaskContextProvider = ({ children }) => {
           ]
         : data
     );
-    
   };
 
   const getTaskDoc = async (user) => {
@@ -70,10 +68,12 @@ const TaskContextProvider = ({ children }) => {
     const docSnap = await getDocs(docRef);
     const doc = docSnap.docs.find((doc) => doc.id === id);
     if (doc) {
+      setLoading(true);
       await updateDoc(doc.ref, { tog_com: !doc.data().tog_com });
       setData(
         data?.map((item) => {
           if (item.id === id) {
+            setLoading(false);
             return { ...item, tog_com: !item.tog_com };
           } else {
             return item;
@@ -81,6 +81,7 @@ const TaskContextProvider = ({ children }) => {
         })
       );
     } else {
+      setLoading(false);
       console.log("No such document!");
     }
   };
@@ -111,6 +112,7 @@ const TaskContextProvider = ({ children }) => {
         handleTask,
         delDoc,
         getDocByCom,
+        loading,
       }}
     >
       {children}
